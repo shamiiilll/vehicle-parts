@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpareLink | Vehicle Marketplace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#0071e3;
+--light:#f5f5f7;
+--card:#ffffff;
+--dark:#111;
+--radius:22px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:var(--light);
+color:#111;
+}
+
+/* NAVBAR */
+
+header{
+background:white;
+position:sticky;
+top:0;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+z-index:100;
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+}
+
+nav a{
+margin-left:28px;
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+nav a:hover{
+color:var(--primary);
+}
+
+/* HERO */
+
+.hero{
+max-width:1200px;
+margin:60px auto;
+padding:0 20px;
+display:grid;
+grid-template-columns:1.2fr 1fr;
+gap:40px;
+align-items:center;
+}
+
+.hero-text h1{
+font-size:50px;
+}
+
+.hero-text p{
+margin-top:15px;
+font-size:18px;
+color:#555;
+}
+
+.hero-text button{
+margin-top:25px;
+padding:14px 35px;
+border:none;
+background:var(--primary);
+color:white;
+border-radius:30px;
+cursor:pointer;
+}
+
+.hero-img img{
+width:100%;
+border-radius:var(--radius);
+}
+
+/* SEARCH */
+
+.search{
+max-width:700px;
+margin:30px auto;
+display:flex;
+}
+
+.search input{
+flex:1;
+padding:14px;
+border:1px solid #ddd;
+border-radius:30px 0 0 30px;
+}
+
+.search button{
+padding:14px 30px;
+border:none;
+background:var(--primary);
+color:white;
+border-radius:0 30px 30px 0;
+cursor:pointer;
+}
+
+/* SECTIONS */
+
+.section{
+max-width:1200px;
+margin:80px auto;
+padding:0 20px;
+}
+
+.section h2{
+text-align:center;
+font-size:36px;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:25px;
+}
+
+.card{
+background:var(--card);
+padding:25px;
+border-radius:var(--radius);
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card img{
+width:100%;
+height:150px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.card h3{
+margin-top:15px;
+}
+
+.card p{
+color:#666;
+margin:8px 0;
+}
+
+.card button{
+padding:10px 20px;
+border:none;
+background:var(--primary);
+color:white;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* FEATURE SELL */
+
+.feature{
+max-width:1200px;
+margin:90px auto;
+background:#111;
+color:white;
+padding:60px;
+border-radius:30px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+.feature button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+background:var(--primary);
+color:white;
+border-radius:25px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111;
+color:#aaa;
+padding:40px 20px;
+margin-top:80px;
+}
+
+.footer{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+}
+
+.footer h4{
+color:white;
+margin-bottom:10px;
+}
+
+.footer a{
+display:block;
+text-decoration:none;
+color:#aaa;
+margin-bottom:8px;
+}
+
+.copy{
+text-align:center;
+margin-top:20px;
+font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="navbar">
+<div class="logo">SpareLink</div>
+<nav>
+<a href="#">Home</a>
+<a href="{% url 'shop' %}">Shop</a>
+<a href="{% url 'sell' %}">Sell</a>
+<a href="#">Search</a>
+{% if user.is_authenticated %}
+
+<a href="{% url 'logout' %}">Logout</a>
+
+{% else %}
+
+<a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+</nav>
+</div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-text">
+<h1>Buy & Sell Vehicle Spare Parts</h1>
+<p>India's premium marketplace for genuine vehicle parts.</p>
+<button>Explore Parts</button>
+</div>
+
+<div class="hero-img">
+<img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+</div>
+
+</section>
+
+<!-- SEARCH -->
+
+<div class="search">
+<input type="text" placeholder="Search engines, tyres, brake parts...">
+<button>Search</button>
+</div>
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+<h2>Categories</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537">
+<h3>Engines</h3>
+<p>High performance engines</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2">
+<h3>Alloy Wheels</h3>
+<p>Stylish wheels</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1592853625601-9f0f24c3d2f2">
+<h3>Brake System</h3>
+<p>Safe braking</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a">
+<h3>Headlights</h3>
+<p>LED lighting</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURED PRODUCTS -->
+
+<section class="section">
+
+<h2>Featured Products</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65">
+<h3>Car Engine</h3>
+<p>$850</p>
+<button>Buy</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1597007030739-6d2e7e7c6c3c">
+<h3>Alloy Wheel</h3>
+<p>$250</p>
+<button>Buy</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599256872237-5dcc0fbe9668">
+<h3>Brake Disc</h3>
+<p>$120</p>
+<button>Buy</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- SELL SECTION -->
+
+<section class="feature">
+
+<div>
+<h2>Sell Your Spare Parts</h2>
+<p>Upload your unused vehicle parts and start earning instantly.</p>
+<button>Start Selling</button>
+</div>
+
+<div>
+<h2>Find Genuine Parts</h2>
+<p>Browse thousands of spare parts from trusted sellers.</p>
+<button>Start Buying</button>
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer">
+
+<div>
+<h4>SpareLink</h4>
+<p>India's trusted vehicle parts marketplace.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<a href="#">Shop</a>
+<a href="#">Sell</a>
+<a href="{% url 'login' %}">Login</a>
+</div>
+
+<div>
+<h4>Support</h4>
+<a href="#">Help Center</a>
+<a href="#">Contact</a>
+</div>
+
+</div>
+
+<div class="copy">
+© 2026 SpareLink
+</div>
+
+</footer>
+
+</body>
+</html>
