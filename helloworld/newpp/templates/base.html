@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SpareLink | Vehicle Marketplace</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--primary:#0071e3;
+--light:#f5f5f7;
+--card:#ffffff;
+--dark:#111;
+--radius:22px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+body{
+background:var(--light);
+color:#111;
+}
+
+/* NAVBAR */
+header{
+background:white;
+position:sticky;
+top:0;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+z-index:100;
+}
+
+.navbar{
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+}
+
+.logo{
+font-size:24px;
+font-weight:700;
+}
+
+nav a{
+margin-left:28px;
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+nav a:hover{
+color:var(--primary);
+}
+
+/* FOOTER */
+footer{
+background:#111;
+color:#aaa;
+padding:40px 20px;
+margin-top:80px;
+}
+
+.footer{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+}
+
+.footer h4{
+color:white;
+margin-bottom:10px;
+}
+
+.footer a{
+display:block;
+text-decoration:none;
+color:#aaa;
+margin-bottom:8px;
+}
+
+.copy{
+text-align:center;
+margin-top:20px;
+font-size:13px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+<div class="navbar">
+<div class="logo">SpareLink</div>
+<nav>
+  <a href="{% url 'home' %}">Home</a>
+  
+  {% if not hide_nav_links %}
+    <a href={% url 'home'%}"#categories">Shop</a>
+    <a href="{% url 'sell' %}">Sell</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'my_products' %}">My Products</a>
+      <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  {% endif %}
+</nav>
+</div>
+</header>
+
+<!-- PAGE CONTENT -->
+<main>
+{% block content %}
+<!-- Each page will insert its own content here -->
+{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer">
+<div>
+<h4>SpareLink</h4>
+<p>India's trusted vehicle parts marketplace.</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<a href="{% url 'shop' %}">Shop</a>
+<a href="{% url 'sell' %}">Sell</a>
+<a href="{% url 'login' %}">Login</a>
+</div>
+
+<div>
+<h4>Support</h4>
+<a href="#">Help Center</a>
+<a href="#">Contact</a>
+</div>
+</div>
+
+<div class="copy">
+© 2026 SpareLink
+</div>
+</footer>
+
+</body>
+</html>

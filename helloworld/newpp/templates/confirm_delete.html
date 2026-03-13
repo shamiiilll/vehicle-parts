@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+<h2>Delete Product</h2>
+
+<p>Are you sure you want to delete <strong>{{ item.name }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" style="padding:10px 20px; background:red; color:white; border:none; border-radius:10px; cursor:pointer;">Yes, Delete</button>
+    <a href="{% url 'my_products' %}"><button type="button" style="padding:10px 20px; border:none; border-radius:10px; cursor:pointer;">Cancel</button></a>
+</form>
+</section>
+{% endblock %}
