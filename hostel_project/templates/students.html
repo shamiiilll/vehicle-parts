@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="color:#d4af37;">Students</h2>
+
+{% if students %}
+<table class="table table-borderless align-middle">
+
+<thead>
+<tr style="color:#d4af37;">
+<th>Username</th>
+<th>Role</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+{% for s in students %}
+<tr>
+
+<td style="color:#ccc;">{{ s.username }}</td>
+
+<td>
+<span class="badge bg-info text-dark">{{ s.role }}</span>
+</td>
+
+<td>
+<span class="badge bg-success">Active</span>
+</td>
+
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+{% else %}
+<p style="color:#aaa;">No students found</p>
+{% endif %}
+
+{% endblock %}

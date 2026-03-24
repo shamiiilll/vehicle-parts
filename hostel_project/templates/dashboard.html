@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<h2 style="color:#d4af37; margin-bottom:25px;">Dashboard</h2>
+
+<div class="row g-4">
+
+<!-- ROOMS -->
+<div class="col-md-3">
+<a href="{% url 'rooms' %}" style="text-decoration:none;">
+<div class="card p-3">
+<div class="d-flex justify-content-between">
+<div>
+<p style="color:#aaa;">Rooms</p>
+<h3 class="text-white">{{ rooms.count }}</h3>
+</div>
+<div>
+<i class="bi bi-building" style="font-size:22px; color:#d4af37;"></i>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<!-- FEES -->
+
+<div class="col-md-3">
+<a href="{% url 'fees' %}" style="text-decoration:none;">
+<div class="card p-3">
+<div class="d-flex justify-content-between">
+<div>
+<p style="color:#aaa;">Fees</p>
+<h3 class="text-white">{{ fees.count }}</h3>
+</div>
+<div>
+<i class="bi bi-cash-stack" style="font-size:22px; color:#d4af37;"></i>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<!-- COMPLAINTS -->
+
+<div class="col-md-3">
+<a href="{% url 'complaints' %}" style="text-decoration:none;">
+<div class="card p-3">
+<div class="d-flex justify-content-between">
+<div>
+<p style="color:#aaa;">Complaints</p>
+<h3 class="text-white">{{ complaints.count }}</h3>
+</div>
+<div>
+<i class="bi bi-exclamation-circle" style="font-size:22px; color:#d4af37;"></i>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+<!-- NOTICES -->
+<div class="col-md-3">
+<a href="{% url 'notices' %}" style="text-decoration:none;">
+<div class="card p-3">
+<div class="d-flex justify-content-between">
+<div>
+<p style="color:#aaa;">Notices</p>
+<h3 class="text-white">{{ notices.count }}</h3>
+</div>
+<div>
+<i class="bi bi-megaphone" style="font-size:22px; color:#d4af37;"></i>
+</div>
+</div>
+</div>
+</a>
+</div>
+
+</div>
+
+<!-- SECOND ROW -->
+<div class="row g-4 mt-3">
+
+<!-- GRAPH -->
+<div class="col-md-8">
+<div class="card p-4">
+<p style="color:#aaa;">Activity Overview</p>
+
+<canvas id="myChart" height="100"></canvas>
+
+</div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="col-md-4">
+<div class="card p-4">
+
+<p style="color:#aaa;">Quick Details</p>
+
+<div class="d-flex justify-content-between mb-2" style="cursor:pointer;">
+<span style="color:#ccc;">Students</span>
+<a href="{% url 'students' %}" class="text-white" style="text-decoration:none;">
+{{ students.count }}
+</a>
+</div>
+
+<div class="d-flex justify-content-between mb-2" style="cursor:pointer;">
+<span style="color:#ccc;">Rooms</span>
+<a href="{% url 'rooms' %}" class="text-white">{{ rooms.count }}</a>
+</div>
+
+<div class="d-flex justify-content-between mb-2" style="cursor:pointer;">
+<span style="color:#ccc;">Fees</span>
+<a href="{% url 'fees' %}" class="text-white">{{ fees.count }}</a>
+</div>
+
+<div class="d-flex justify-content-between mb-2" style="cursor:pointer;">
+<span style="color:#ccc;">Complaints</span>
+<a href="{% url 'complaints' %}" class="text-white">{{ complaints.count }}</a>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['Rooms', 'Fees', 'Complaints', 'Notices'],
+datasets: [{
+data: {{ chart_data|safe }},
+backgroundColor: '#d4af37'
+}]
+},
+options: {
+plugins: { legend: { display: false } },
+scales: {
+x: { ticks: { color: '#aaa' } },
+y: { ticks: { color: '#aaa' } }
+}
+}
+});
+</script>
+
+{% endblock %}

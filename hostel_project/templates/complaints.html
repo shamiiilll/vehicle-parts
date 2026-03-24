@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="color:#d4af37;">Complaints</h2>
+
+<div class="form-box">
+<form method="POST">
+{% csrf_token %}
+<textarea name="message" placeholder="Write your complaint..." class="form-control mb-2" required></textarea>
+<button class="btn btn-gold w-100">Submit</button>
+</form>
+</div>
+
+{% if complaints %}
+{% for c in complaints %}
+<div class="card p-3 mb-3">
+
+<div class="d-flex justify-content-between">
+<p style="color:#ccc;">{{ c.message }}</p>
+
+<span class="badge bg-warning text-dark">
+{{ c.status }}
+</span>
+</div>
+
+</div>
+{% endfor %}
+{% else %}
+<p style="color:#aaa;">No complaints yet</p>
+{% endif %}
+
+{% endblock %}

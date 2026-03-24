@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="color:#d4af37;">Notices</h2>
+
+<div class="form-box">
+<form method="POST">
+{% csrf_token %}
+<input name="title" placeholder="Title" class="form-control mb-2" required>
+<textarea name="content" placeholder="Write notice..." class="form-control mb-2" required></textarea>
+<button class="btn btn-gold w-100">Post Notice</button>
+</form>
+</div>
+
+{% if notices %}
+{% for n in notices %}
+<div class="card p-3 mb-3">
+
+<h5 style="color:#d4af37;">{{ n.title }}</h5>
+<p style="color:#ccc;">{{ n.content }}</p>
+
+</div>
+{% endfor %}
+{% else %}
+<p style="color:#aaa;">No notices yet</p>
+{% endif %}
+
+{% endblock %}
