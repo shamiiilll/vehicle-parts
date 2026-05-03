@@ -1,0 +1,25 @@
+<section id="sec-rooms" class="section">
+                    <div class="page-header">
+                        <h2 class="page-title">Room Management</h2>
+                        <button class="btn btn-small admin-only" onclick="openModal('add-room-modal')">
+                            <i class="fas fa-plus"></i> Add New Room
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Room No</th>
+                                    <th>Type</th>
+                                    <th>Capacity</th>
+                                    <th>Occupied</th>
+                                    <th>Status</th>
+                                    <th class="admin-only">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rooms-table-body">
+                                <!-- Dynamic -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
